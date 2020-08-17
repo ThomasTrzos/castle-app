@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_205521) do
+ActiveRecord::Schema.define(version: 2020_08_17_205523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ip_ban_settings_sets", force: :cascade do |t|
+    t.integer "ban_duration"
+    t.integer "number_of_permitted_failed_requests"
+    t.integer "check_duration"
+    t.integer "number_of_emails_within_check"
+    t.bigint "organization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_ip_ban_settings_sets_on_organization_id"
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string "name"
@@ -23,4 +34,5 @@ ActiveRecord::Schema.define(version: 2020_08_17_205521) do
     t.index ["api_token"], name: "index_organizations_on_api_token", unique: true
   end
 
+  add_foreign_key "ip_ban_settings_sets", "organizations"
 end

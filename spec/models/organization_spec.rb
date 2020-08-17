@@ -7,6 +7,8 @@ RSpec.describe(Organization, type: :model) do
     )
   end
 
+  it { should have_one(:ip_ban_settings_set) }
+
   it 'is valid with valid attributes' do
     expect(subject).to(be_valid)
   end
