@@ -26,6 +26,7 @@ group :test do
   gem 'airborne', '~> 0.3.5'
   gem 'database_cleaner', '~> 1.8', '>= 1.8.5'
   gem 'faker', '~> 2.13'
+  gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'shoulda-matchers', '~> 4.3'
 end
 
