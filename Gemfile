@@ -11,6 +11,8 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'pry', '~> 0.13.1'
+gem 'redis', '~> 4.2', '>= 4.2.1'
+gem 'redis-rails', '~> 5.0', '>= 5.0.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -27,6 +29,7 @@ group :test do
   gem 'database_cleaner', '~> 1.8', '>= 1.8.5'
   gem 'faker', '~> 2.13'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
+  gem 'mock_redis', '~> 0.25.0'
   gem 'shoulda-matchers', '~> 4.3'
 end
 

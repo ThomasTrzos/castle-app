@@ -22,7 +22,9 @@ Bundler.require(*Rails.groups)
 module CastleApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults(6.0)
+
+    config.active_record.cache_versioning = false
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
