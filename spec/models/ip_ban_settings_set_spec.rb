@@ -36,4 +36,15 @@ RSpec.describe(IpBanSettingsSet, type: :model) do
     subject.number_of_emails_within_check = nil
     expect(subject).to_not(be_valid)
   end
+
+  describe('#settings_hash') do
+    it 'returns correct hash' do
+      expect(subject.settings_hash).to(include(
+        :ban_duration,
+        :number_of_permitted_failed_requests,
+        :check_duration,
+        :number_of_emails_within_check
+      ))
+    end
+  end
 end
