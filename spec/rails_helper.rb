@@ -85,6 +85,11 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
+
+    redis_instance = MockRedis.new
+    allow(Redis).to(receive(:new).and_return(redis_instance))
+    allow(Redis::Store).to(receive(:new).and_return(redis_instance))
+    redis_instance.flushdb
   end
 
   config.append_after(:each) do
