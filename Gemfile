@@ -13,6 +13,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'pry', '~> 0.13.1'
 gem 'redis', '~> 4.2', '>= 4.2.1'
 gem 'redis-rails', '~> 5.0', '>= 5.0.2'
+gem 'dry-validation', '~> 1.5', '>= 1.5.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
