@@ -16,6 +16,7 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && rails dev:cache && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/castle-app
+      - ./config/database-docker-compose.yml:/castle-app/config/database.yml
     ports:
       - "3000:3000"
     depends_on:

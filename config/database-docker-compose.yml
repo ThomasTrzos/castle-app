@@ -10,11 +10,13 @@ development:
   database: castle_app_development
   username: postgres
   password: postgres
+  host: db
 
 test:
   <<: *default
   database: castle_app_test
   username: postgres
+  host: db
 
 production:
   <<: *default
