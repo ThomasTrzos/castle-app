@@ -1,0 +1,38 @@
+# Node port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-np
+  labels:
+    app: castle-app
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+      name: web-port
+  selector:
+    app: castle-app
+
+# Ingress
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: castle-app-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /*
+spec:
+  rules:
+    - host: castle-app.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: web-np
+              servicePort: web-port
+---
+

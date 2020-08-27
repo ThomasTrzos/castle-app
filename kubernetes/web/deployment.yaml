@@ -1,0 +1,65 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "castle-app"
+  namespace: "default"
+  labels:
+    app: "castle-app"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: "castle-app"
+  template:
+    metadata:
+      labels:
+        app: "castle-app"
+    spec:
+      hostNetwork: true
+      hostAliases:
+        - ip: "192.168.64.2"
+          hostnames:
+            - "castle-app.com"
+      containers:
+        - name: "castle-app-web"
+          image: "docker.castle-app-web:1.0.7"
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: RAILS_ENV
+              value: "production"
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: castle-app-secrets
+                  key: rails-master-key
+            - name: CASTLE_APP_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: castle-app-secrets
+                  key: db_password
+            - name: REDIS_URL
+              value: "redis://10.107.31.237:6379"
+---
+apiVersion: "autoscaling/v1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "castle-app-hpa"
+  namespace: "default"
+  labels:
+    app: "castle-app"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "castle-app"
+    apiVersion: "apps/v1beta1"
+  minReplicas: 4
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
