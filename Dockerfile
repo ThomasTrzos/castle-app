@@ -9,6 +9,7 @@ COPY Gemfile /castle-app/Gemfile
 COPY Gemfile.lock /castle-app/Gemfile.lock
 
 RUN bundle config --global frozen 1 \
+  && bundle config set without 'development test' \
   && bundle install --jobs 20 --retry 5 \
   && rm -rf /usr/local/bundle/cache/*.gem \
   && find /usr/local/bundle/gems/ -name "*.c" -delete \
@@ -24,4 +25,4 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0", "-e", "development"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-e", "production"]
