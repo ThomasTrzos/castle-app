@@ -22,10 +22,6 @@ spec:
         app: "castle-app"
     spec:
       hostNetwork: true
-      hostAliases:
-        - ip: "192.168.64.2"
-          hostnames:
-            - "castle-app.com"
       containers:
         - name: "castle-app-web"
           image: "docker.castle-app-web:1.0.7"
