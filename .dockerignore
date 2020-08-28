@@ -11,3 +11,4 @@ logs/
 Dockerfile
 README.md
 docker-compose.yml
+./kubernetes
