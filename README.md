@@ -35,7 +35,19 @@ docker-compose build
 docker-compose run web rails db:create
 ```
 
-**6. Run web application, postgres and redis server**
+**6. Run migrations**
+
+```
+docker-compose run web rails db:migrate
+```
+
+**7. Run seeds to create sample Organization and IpBanSettingsSet**
+
+```
+docker-compose run web rails db:seed
+```
+
+**8. Run web application, postgres and redis server**
 
 ```
 docker-compose up
