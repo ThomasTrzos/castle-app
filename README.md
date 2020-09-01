@@ -68,54 +68,60 @@ GET /api/v1/authentication_events/analyse?api_token=2ee2cb2b-6d64-41d3-b9f1-bd68
 ```
 
 _case 1: system doesn't ban user's ip address_
-HTTP Code: 200
 
 ```json
+HTTP Code: 200
+
 {
   "message": "Next login request permitted."
 }
 ```
 
 _case 2: system banned user's ip address for X seconds_
-HTTP Code: 200
 
 ```json
+HTTP Code: 200
+
 {
   "message": "User hits login limitations. Ip address banned for 10 seconds."
 }
 ```
 
 _case 3: wrong api_token_
-HTTP Code: 401
 
 ```json
+HTTP Code: 401
+
 {
   "error": "Invalid ApiToken"
 }
 ```
 
 _case 4: wrong event name (for now only login_failed is valid)_
-HTTP Code: 422
 
 ```json
+HTTP Code: 422
+
 {
   "event_name": ["must be equal to login_failed"]
 }
 ```
 
 _case 5: no ip_address_
-HTTP Code: 422
 
 ```json
+HTTP Code: 422
+
 {
   "ip_address": ["must be filled"]
 }
 ```
 
 _case 6: no email_
-HTTP Code: 422
 
 ```json
+HTTP Code: 422
+
 {
   "email": ["must be filled"]
 }
