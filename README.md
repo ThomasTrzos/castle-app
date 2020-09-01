@@ -60,3 +60,84 @@ docker-compose up
 ```
 docker-compose run web bundle exec rspec spec
 ```
+
+### Sample request and responses
+
+```
+GET /api/v1/authentication_events/analyse?api_token=2ee2cb2b-6d64-41d3-b9f1-bd68f22d6f48&event_name=login_failed&ip_address=216.150.182.208&email=sample-user@email.com
+```
+
+_case 1: system doesn't ban user's ip address_
+HTTP Code: 200
+
+```json
+{
+  "message": "Next login request permitted."
+}
+```
+
+_case 2: system banned user's ip address for X seconds_
+HTTP Code: 200
+
+```json
+{
+  "message": "User hits login limitations. Ip address banned for 10 seconds."
+}
+```
+
+_case 3: wrong api_token_
+HTTP Code: 401
+
+```json
+{
+  "error": "Invalid ApiToken"
+}
+```
+
+_case 4: wrong event name (for now only login_failed is valid)_
+HTTP Code: 422
+
+```json
+{
+  "event_name": ["must be equal to login_failed"]
+}
+```
+
+_case 5: no ip_address_
+HTTP Code: 422
+
+```json
+{
+  "ip_address": ["must be filled"]
+}
+```
+
+_case 6: no email_
+HTTP Code: 422
+
+```json
+{
+  "email": ["must be filled"]
+}
+```
+
+## API
+
+|               Endpoint                |                  Params                  | Method |                                                  Description                                                  |
+| :-----------------------------------: | :--------------------------------------: | :----: | :-----------------------------------------------------------------------------------------------------------: |
+|                   /                   |                                          |  GET   |                                           root, name of the project                                           |
+| /api/v1/authentication_events/analyse | api_token, event_name, ip_address, email |  GET   | analyse provided user's data and returns http code: 200 if request is allowed by the system or 403 if doesn't |
+
+## Ideas for future extensions
+
+- deploy application to the Kubernetes Engine in Google Cloud Platform
+- add Stackdriver for logs and resources monitoring
+- add NewRelic or Datadog for monitoring rails application on production environment
+
+## Authors
+
+Tomasz Trzos
+
+## License
+
+© 2020 Tomasz Trzos all rights reserved.
