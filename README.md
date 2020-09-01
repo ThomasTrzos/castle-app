@@ -74,7 +74,7 @@ docker-compose run web bundle exec rspec spec
 ### Database structure
 
 <p align="center">
-  <img src="https://i.ibb.co/pZ0LmR3/database-diagram.png" width="200">
+  <img src="https://i.ibb.co/pZ0LmR3/database-diagram.png" width="400">
 </p>
 
 Organization is an object to save a client's data. When we create an organization we also generate api_token which is used by a client to communicate with our system.
