@@ -11,9 +11,9 @@ class Api::V1::AuthenticationEventsController < ApplicationController
         result = AnalyseAuthenticationEvent.call(authentication_event_params.merge(settings_hash))
 
         if result == true
-          render(json: '', status: :ok)
+          render(json: { message: 'Next login request permitted.' }, status: :ok)
         else
-          render(json: '', status: :forbidden)
+          render(json: { message: "User hits login limitations. Ip address banned for #{settings_hash[:ban_duration]} seconds." }, status: :ok)
         end
 
       else

@@ -126,6 +126,10 @@ describe Api::V1::AuthenticationEventsController, type: :request do
           it 'returns correct http status' do
             expect(response).to(have_http_status(200))
           end
+
+          it 'returns correct message' do
+            expect(JSON.parse(response.body)).to(eq('message' => "Next login request permitted."))
+          end
         end
 
         context 'not accepted authentication request' do
@@ -135,7 +139,11 @@ describe Api::V1::AuthenticationEventsController, type: :request do
           end
 
           it 'returns correct http status' do
-            expect(response).to(have_http_status(403))
+            expect(response).to(have_http_status(200))
+          end
+
+          it 'returns correct message' do
+            expect(JSON.parse(response.body)).to(eq('message' => "User hits login limitations. Ip address banned for #{ip_ban_settings_set.ban_duration} seconds."))
           end
         end
       end
