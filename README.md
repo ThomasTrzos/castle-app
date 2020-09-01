@@ -1,4 +1,6 @@
-# CastleApp by Tomasz Trzos
+<h1 align="center">
+  CastleApp by Tomasz Trzos
+</p>
 
 ## General Information
 
@@ -60,6 +62,28 @@ docker-compose up
 ```
 docker-compose run web bundle exec rspec spec
 ```
+
+### Task description
+
+> Credential stuffing is the process where an attacker tries to validate a list of stolen email/password combinations in as short time as possible. Given an event name, an IP address and an email address as input, build a rate limiting app that bans an IP address for a X seconds when Y failed requests has been observed within the last Z seconds using N different emails.
+
+> All of the parameters should be configurable.
+
+> Example input: "login_failed", "1.1.1.1", "test@example.com"
+
+### Database structure
+
+<p align="center">
+  <img src="https://i.ibb.co/pZ0LmR3/database-diagram.png" width="200">
+</p>
+
+Organization is an object to save a client's data. When we create an organization we also generate api_token which is used by a client to communicate with our system.
+
+If you want to get an api_token for testing purposes please get organization's api token through rails console.
+
+Every organisation needs a IpBanSettingsSet which contains settings how our system should work for client's website.
+
+Organization X seconds when Y failed requests has been observed within the last Z seconds using N different emails
 
 ### Sample request and responses
 
